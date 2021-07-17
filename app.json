@@ -1,0 +1,20 @@
+{
+  "name": "automation-scripts-laginha",
+  "addons": [
+    "scheduler"
+  ],
+  "env": {
+    "CLIENT_ID": {
+      "required": true
+    },
+    "CLIENT_SECRET": {
+      "required": true
+    },
+    "REFRESH_TOKEN": {
+      "required": true
+    }
+  },
+  "scripts": {
+    "postdeploy": "npx tsc"
+  }
+}

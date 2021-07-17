@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/node12/tsconfig.json",
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "outDir": "build/"
+  },
+  "include": [
+    "index.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+}
