@@ -1,5 +1,5 @@
-import { ActionParams } from "./types";
-import { uploadToDrive } from "./uploadToDrive";
+import { ActionParams } from "actions/types";
+import { uploadToDrive } from "actions/uploadToDrive";
 
 
 export const Actions: {

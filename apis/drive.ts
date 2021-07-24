@@ -1,12 +1,12 @@
-import {getAccessToken} from "./googleAuth";
+import {getAccessToken} from "apis/googleAuth";
 import axios from "axios";
 
 export async function uploadFile({data, size}: { data: string, size: number }, fileName: string, parentId: string) {
-    const access_token = await getAccessToken();
+    const accessToken = await getAccessToken();
     const {data: {id}} = await axios.post("https://www.googleapis.com/upload/drive/v3/files", Buffer.from(data, "base64"), {
         params: {
             uploadType: 'media',
-            access_token
+            access_token: accessToken
         },
         headers: {
             "Content-Type": "application/pdf",
@@ -18,7 +18,7 @@ export async function uploadFile({data, size}: { data: string, size: number }, f
         name: fileName
     }, {
         params: {
-            access_token,
+            access_token: accessToken,
             addParents: parentId,
             supportsAllDrives: true,
             enforceSingleParent: true,
@@ -27,11 +27,11 @@ export async function uploadFile({data, size}: { data: string, size: number }, f
 }
 
 export const getFile = async (key: string) => {
-    const access_token = await getAccessToken();
+    const accessToken = await getAccessToken();
     const {data} = await axios.get("https://www.googleapis.com/drive/v3/files/" + key, {
         params: {alt: 'media'},
         headers: {
-            "Authorization": `Bearer ${access_token}`
+            "Authorization": `Bearer ${accessToken}`
         }
     });
     return data;

@@ -1,10 +1,9 @@
-'use strict';
 import "dotenv/config";
 import {DateTime} from "luxon";
 import {Actions, ActionType} from './actions';
-import {addLabels, getAttachment, getEmails, getMessage} from "./apis/gmail";
+import {addLabels, getAttachment, getEmails, getMessage} from "apis/gmail";
 
-import {getFile} from "./apis/drive";
+import {getFile} from "apis/drive";
 
 interface IActionsJson {
     [k: string]: {
@@ -14,17 +13,17 @@ interface IActionsJson {
             args: string[]
         }[]
     }
-};
+}
 
 
 (async () => {
     try {
-        const actions : IActionsJson = await getFile(process.env.ACTIONS_FILE as string);
+        const actions: IActionsJson = await getFile(process.env.ACTIONS_FILE as string);
         const froms = Object.keys(actions).join(" OR ");
         const incomingEmails = await getEmails(`in:inbox ${froms} AND NOT label:processed`)
 
 
-        if(incomingEmails.data.resultSizeEstimate == 0) {
+        if (incomingEmails.data.resultSizeEstimate === 0) {
             return;
         }
 
@@ -48,7 +47,7 @@ interface IActionsJson {
                 if (!e.body.attachmentId) {
                     continue;
                 }
-                const date = DateTime.fromMillis(Number.parseInt(wholeMessage.data.internalDate)).minus({months: 1});
+                const date = DateTime.fromMillis(Number.parseInt(wholeMessage.data.internalDate, 10)).minus({months: 1});
                 const attachment = await getAttachment(message.id, e.body.attachmentId);
 
                 await Promise.all(actionObject.actions.map(async ({name, args}) => {
@@ -68,6 +67,7 @@ interface IActionsJson {
 
 
     } catch (e) {
+        // tslint:disable-next-line:no-console
         console.error(e);
     }
 })()

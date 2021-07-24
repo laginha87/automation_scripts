@@ -3,7 +3,12 @@
   "compilerOptions": {
     "preserveConstEnums": true,
     "esModuleInterop": true,
-    "outDir": "build/"
+    "outDir": "build/",
+    "baseUrl": "./",
+    "paths": {
+      "actions/*": ["./actions/*"],
+      "apis/*": ["./apis/*"]
+    }
   },
   "include": [
     "index.ts"

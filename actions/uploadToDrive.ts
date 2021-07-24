@@ -1,5 +1,5 @@
-import {ActionParams} from "./types";
-import {uploadFile} from "../apis/drive";
+import {ActionParams} from "actions/types";
+import {uploadFile} from "apis/drive";
 
 export const uploadToDrive = (parentId: string, endOfFileName: string) =>
     async ({
@@ -13,10 +13,11 @@ export const uploadToDrive = (parentId: string, endOfFileName: string) =>
             if (!messagePayload.filename.endsWith(".pdf")) {
                 return;
             }
-            const file_name = `${date.toFormat("yyyy-MM")} ${endOfFileName.replace("${i}", index.toString())}`;
-            await uploadFile(attachment, file_name, parentId);
+            const fileName = `${date.toFormat("yyyy-MM")} ${endOfFileName.replace("${i}", index.toString())}`;
+            await uploadFile(attachment, fileName, parentId);
         } catch
             (e) {
+            // tslint:disable-next-line:no-console
             console.error(e)
         }
     }

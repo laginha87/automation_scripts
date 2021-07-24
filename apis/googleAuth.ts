@@ -1,13 +1,13 @@
 import axios from "axios";
 
-let access_token: string;
+let accesToken: string;
 
 
 export const getAccessToken = async (): Promise<string> => {
-    if (!access_token) {
-        access_token = await refreshToken();
+    if (!accesToken) {
+        accesToken = await refreshToken();
     }
-    return access_token
+    return accesToken
 }
 
 
@@ -15,7 +15,7 @@ const refreshToken = async () => {
     try {
         const {
             data: {
-                access_token
+                access_token: accessToken
             }
         } = await axios.post("https://oauth2.googleapis.com/token",
             {
@@ -28,8 +28,9 @@ const refreshToken = async () => {
                 responseType: 'json'
             });
 
-        return access_token;
+        return accessToken;
     } catch (e) {
+        // tslint:disable-next-line:no-console
         console.error(e);
     }
 };

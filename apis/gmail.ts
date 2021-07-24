@@ -1,4 +1,4 @@
-import {getAccessToken} from "./googleAuth";
+import {getAccessToken} from "apis/googleAuth";
 import axios, {AxiosInstance, AxiosResponse} from "axios";
 
 interface MessageHeader {
@@ -33,12 +33,12 @@ export interface GmailList {
 }
 
 const generateGmailClient = async <T>(b: (a: AxiosInstance) => Promise<AxiosResponse<T>>) => {
-    const access_token = await getAccessToken();
+    const accessToken = await getAccessToken();
 
     const gmail = axios.create({
         baseURL: "https://gmail.googleapis.com/gmail/v1/",
         params: {
-            access_token
+            access_token: accessToken
         },
         responseType: 'json'
     })
