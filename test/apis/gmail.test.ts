@@ -1,24 +1,12 @@
-import {config} from "dotenv";
-
-config({path: ".env.test"})
-
 import _ from 'lodash';
 import test from 'ava';
 import nock from 'nock';
 import {addLabels, getAttachment, getEmails, getMessage} from "apis/gmail";
 
-const interceptAuthentication = () => {
-    nock("https://oauth2.googleapis.com").post("/token", {
-        client_id: "CLIENT_ID",
-        client_secret: "CLIENT_SECRET",
-        grant_type: 'refresh_token',
-        refresh_token: "REFRESH_TOKEN",
-    }).reply(200, {
-        access_token: "ACCESS_TOKEN"
-    });
-}
+import {interceptAuthentication} from '@helpers/interceptAuthentication';
 
 const gmailNock = () => nock("https://gmail.googleapis.com/gmail/v1");
+
 test('addLabels', async (t) => {
     interceptAuthentication();
     const scope = gmailNock()
