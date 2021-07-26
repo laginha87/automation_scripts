@@ -1,9 +1,9 @@
 import "dotenv/config";
 import {DateTime} from "luxon";
-import {Actions, ActionType} from './actions';
-import {addLabels, getAttachment, getEmails, getMessage} from "apis/gmail";
+import {Actions, ActionType} from './src/actions';
+import {addLabels, getAttachment, getEmails, getMessage} from "./src/apis/gmail";
 
-import {getFile} from "apis/drive";
+import {getFile} from "./src/apis/drive";
 
 interface IActionsJson {
     [k: string]: {

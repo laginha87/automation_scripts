@@ -6,8 +6,8 @@
     "outDir": "build/",
     "baseUrl": "./",
     "paths": {
-      "actions/*": ["./actions/*"],
-      "apis/*": ["./apis/*"]
+      "actions/*": ["./src/actions/*"],
+      "apis/*": ["./src/apis/*"]
     }
   },
   "include": [
