@@ -9,7 +9,7 @@ export const uploadToDrive = (parentId: string, endOfFileName: string) =>
                messagePayload
            }: ActionParams) => {
         try {
-            /*This could be a filter on the actions array*/
+            /* TODO This could be a filter on the actions array */
             if (!messagePayload.filename.endsWith(".pdf")) {
                 return;
             }

@@ -11,8 +11,7 @@ export interface MessagePart {
     headers: MessageHeader[],
     mimeType: string,
     filename: string,
-    body: MessagePartBody,
-    parts: MessagePart[],
+    parts: (MessagePart & {body: MessagePartBody})[],
 }
 
 export interface MessagePartBody {

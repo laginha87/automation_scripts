@@ -4,3 +4,6 @@ node_modules/
 actions_j.json
 build/
 .idea/
+
+.nyc_output
+coverage/
