@@ -62,7 +62,7 @@ test('full on integration', async (t) => {
     interceptGetMessageAttachment("MESSAGE_ID", "attachmentId").reply(200, {attachmentId: "attachmentId", size: 10, data: "TEXT"});
 
 
-    interceptAddLabels(['Label_101']).reply(200);
+    interceptAddLabels(['Label_101'], "MESSAGE_ID").reply(200);
 
     interceptUploadFile("fileId");
     const updateScope = interceptUpdateFile("2021-06 END_FILE_NAME.pdf", "fileId")
