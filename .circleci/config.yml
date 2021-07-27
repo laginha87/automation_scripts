@@ -17,4 +17,6 @@ workflows:
     jobs:
       - node/test:
           version: '16.1'
-      - codecov-job
+      - codecov-job:
+          requires: 
+              - node/test
