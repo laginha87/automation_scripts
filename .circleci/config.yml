@@ -11,10 +11,12 @@ jobs:
       - image: cimg/base:stable
     steps:
       - codecov/upload:
-          file: .nyc_output/
+          file: coverage/lcov.info
 workflows:
   sample:
     jobs:
       - node/test:
           version: '16.1'
-      - codecov-job
+      - codecov-job:
+          requires:
+            - node/test
