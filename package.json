@@ -36,6 +36,7 @@
     "extensions": [
       "ts"
     ],
+    "timeout": "1m",
     "require": [
       "ts-node/register",
       "tsconfig-paths/register",

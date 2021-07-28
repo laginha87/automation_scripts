@@ -32,3 +32,16 @@ test('uploadToDrive("PARENT_ID", "FILE_NAME")({date: {year: 2021, month: 10}, in
     });
     t.true(scope.isDone());
 })
+
+test('uploadToDrive("FILENAME") attachment isn\'t a pdf })', async (t) => {
+    interceptAuthentication();
+    const scope = interceptUploadFile("fileId");
+    const uploadAction = uploadToDrive("PARENT_ID", "FILE_NAME ${i}");
+    await uploadAction({
+        date: DateTime.fromObject({month: 10, year: 2021}),
+        attachment: {data: "Attachment data", attachmentId: '12', size: 10},
+        messagePayload: {filename: "report.txt"} as MessagePart,
+        index: 1
+    });
+    t.false(scope.isDone());
+})
